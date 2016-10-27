@@ -155,7 +155,9 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
             account = [buddy accountWithTransaction:transaction];
         }
     } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completionBlock:^{
-        
+        if (!buddy) {
+            return;
+        }
         if (buddy.status == OTRThreadStatusOffline) {
             //If the buddy if offline then don't try to start the session up
             return;
